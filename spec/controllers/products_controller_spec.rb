@@ -46,6 +46,20 @@ RSpec.describe ProductsController, type: :controller do
 
   end
 
+  describe "GET #edit" do
+
+    it "assigns the requested product as @product" do
+      product = create(:product)
+      get :edit, id: product
+      expect(assigns(:product)).to eq product
+    end
+
+    it "renders the :edit template" do
+      product = create(:product)
+      get :edit, id: product
+      expect(response).to render_template :edit
+    end
+  end
 
 
 end

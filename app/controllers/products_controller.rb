@@ -15,4 +15,8 @@ class ProductsController < ApplicationController
     redirect_to @product if @post.save && return
     render :new
   end
+
+  def edit
+    @product = Product.find(params[:id])
+  end
 end
