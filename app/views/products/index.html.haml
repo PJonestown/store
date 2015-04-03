@@ -1,2 +1,8 @@
 %h1 Products#index
-%p Find me in app/views/products/index.html.haml
+
+
+- @products.each do |p|
+  %ul
+    %li= p.name
+%end
+
