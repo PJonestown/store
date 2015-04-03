@@ -1,8 +1,12 @@
 FactoryGirl.define do
   factory :product do
-    name "MyString"
-description "MyText"
-price "9.99"
+    name { Faker::Commerce.product_name }
+    description { Faker::Company.bs }
+    price { Faker::Commerce.price }
+
+    factory :invalid_product do
+      name nil
+    end
   end
 
 end

@@ -10,6 +10,13 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #show" do
+
+    it "assigns the requested product as @product" do
+      product = create(:product)
+      get :show, id: product
+      expect(assigns(:product)).to eq product
+    end
+
     it "returns http success" do
       get :show
       expect(response).to have_http_status(:success)
