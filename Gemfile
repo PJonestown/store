@@ -23,5 +23,6 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'pry-rails'
 end
 
