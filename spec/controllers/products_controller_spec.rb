@@ -11,7 +11,7 @@ RSpec.describe ProductsController, type: :controller do
       expect(assigns(:products)).to match_array([product, other_product])
     end
 
-    it "returns http success" do
+    it "renders the :index template" do
       get :index
       expect(response).to render_template :index
     end
@@ -33,10 +33,19 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #new" do
-    it "returns http success" do
+
+    it "assigns a new Product to @product" do
       get :new
-      expect(response).to have_http_status(:success)
+      expect(assigns(:product)).to be_a_new(Product)
     end
+
+    it "renders the :new template" do
+      get :new
+      expect(response).to render_template :new
+    end
+
   end
+
+
 
 end
