@@ -3,9 +3,17 @@ require 'rails_helper'
 RSpec.describe ProductsController, type: :controller do
 
   describe "GET #index" do
+
+    it "populates an array of all products" do
+      product = create(:product, name: 'first')
+      other_product = create(:product, name: 'second')
+      get :index
+      expect(assigns(:products)).to match_array([product, other_product])
+    end
+
     it "returns http success" do
       get :index
-      expect(response).to have_http_status(:success)
+      expect(response).to render_template :index
     end
   end
 
