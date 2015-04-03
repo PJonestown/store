@@ -26,3 +26,7 @@ group :development do
   gem 'pry-rails'
 end
 
+group :test do
+  gem 'faker'
+end
+
