@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'simple_form'
-
+gem 'haml-rails', '~> 0.9.0'
 
 group :development, :test do
   gem 'byebug'
