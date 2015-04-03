@@ -12,11 +12,23 @@ class ProductsController < ApplicationController
   end
 
   def create
-    redirect_to @product if @post.save && return
-    render :new
+    @product = Product.new(product_params)
+
+    if @product.save
+      redirect_to @product
+    else
+      render :new
+    end
   end
 
   def edit
     @product = Product.find(params[:id])
   end
+
+  private
+
+  def product_params
+    params.require(:product).permit(:name, :description, :price)
+  end
+
 end
