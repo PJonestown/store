@@ -141,5 +141,22 @@ RSpec.describe ProductsController, type: :controller do
 
   end
 
+  describe "DELETE #destroy" do
+    before :each do
+      @product = create(:product)
+    end
+
+    it "deletes the product" do
+      expect{
+        delete :destroy, id: @product
+      }.to change(Product, :count).by(-1)
+    end
+    
+    it "redirects to contacts#index" do
+      delete :destroy, id: @product
+      expect(response).to redirect_to products_url
+    end
+  end
+
 
 end
