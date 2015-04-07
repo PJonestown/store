@@ -92,5 +92,54 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
+  describe 'PATCH #update' do
+
+    before :each do
+      @product = create(:product,
+                        name: 'something',
+                        description: 'a description',
+                        price: 1.99)
+    end
+
+    context "valid attributes" do
+
+      it "locates the requested @cproduct" do
+        patch :update, id: @product, product: attributes_for(:product)
+        expect(assigns(:product)).to eq(@product)
+      end
+
+      it "changes @product's attributes" do
+        patch :update, id: @product,
+          product: attributes_for(:product,
+               name: 'something else')
+        @product.reload
+        expect(@product.name).to eq('something else')
+      end
+
+      it "redirects to the product" do
+        patch :update, id: @product, product:attributes_for(:product)
+        expect(response).to redirect_to @product
+      end
+    end
+
+    context "with invalid attributes" do
+      it "does not change to product's attributes" do
+        patch :update, id: @product,
+          product: attributes_for(:product,
+                                  name: nil)
+          @product.reload
+          expect(@product.name).to eq('something')
+      end
+
+      it "rerenders the edit template" do
+        patch :update, id: @product,
+          product: attributes_for(:invalid_product)
+        expect(response).to render_template :edit
+      end
+    end
+
+
+  end
+
 
 end
