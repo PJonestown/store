@@ -98,7 +98,8 @@ RSpec.describe ProductsController, type: :controller do
       @product = create(:product,
                         name: 'something',
                         description: 'a description',
-                        price: 1.99)
+                        price: 1.99,
+                        stock: 43)
     end
 
     context "valid attributes" do
@@ -111,9 +112,11 @@ RSpec.describe ProductsController, type: :controller do
       it "changes @product's attributes" do
         patch :update, id: @product,
           product: attributes_for(:product,
-               name: 'something else')
+               name: 'something else',
+               stock: 25 )
         @product.reload
         expect(@product.name).to eq('something else')
+        expect(@product.stock).to eq(25)
       end
 
       it "redirects to the product" do
@@ -126,9 +129,11 @@ RSpec.describe ProductsController, type: :controller do
       it "does not change to product's attributes" do
         patch :update, id: @product,
           product: attributes_for(:product,
-                                  name: nil)
+                                  name: nil,
+                                  stock: 42)
           @product.reload
           expect(@product.name).to eq('something')
+          expect(@product.stock).to_not eq(42)
       end
 
       it "rerenders the edit template" do
